@@ -11,7 +11,7 @@ provider:
       Resource: "*"
 
 functions:
-  test:
-    handler: handler.test
-  test2:
-    handler: handler.test2
+  hello:
+    handler: handler.hello
+  ciao:
+    handler: handler.ciao

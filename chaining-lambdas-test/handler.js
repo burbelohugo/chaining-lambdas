@@ -1,24 +1,25 @@
 const AWS = require('aws-sdk')
 
-module.exports.test = async (event, context) => {
-  let lambda = new AWS.Lambda()
-  let params = {
-    FunctionName: 'chaining-lambda-dev-test2'
+module.exports.hello = (event, context, callback) => {
+  var lambda = new AWS.Lambda()
+  var opts = {
+    FunctionName: 'chaining-lambdas-test-dev-ciao'
   }
-  lambda.invoke(params, function (err, data){
+
+  lambda.invoke(opts, function (err, data) {
     if (err) {
       console.log('error : ' + err)
-      return err
+      callback(err, null)
     } else if (data) {
       const response = {
         statusCode: 200,
         body: JSON.parse(data.Payload)
       }
-      return response
+      callback(null, response)
     }
   })
 }
 
-module.exports.test2 = async (event, context) => {
-  return {message: 'testing functionality 2'}
+module.exports.ciao = (event, context, callback) => {
+  callback(null, { message: 'ciao world!' })
 }
