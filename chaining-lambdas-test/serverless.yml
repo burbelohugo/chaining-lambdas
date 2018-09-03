@@ -4,14 +4,16 @@ provider:
   name: aws
   runtime: nodejs8.10
   iamRoleStatements:
-    - Effect: Allow
+    - Effect: 'Allow'
       Action:
-        - lambda:InvokeFunction
-        - lambda:InvokeAsync
-      Resource: "*"
+        - "sns:Publish"
+      Resource:
+        - "*"
 
 functions:
   hello:
     handler: handler.hello
   ciao:
     handler: handler.ciao
+    events:
+      - sns: ciao-dev
